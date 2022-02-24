@@ -118,26 +118,26 @@ class ItemModel : ObservableObject {
         return 0
     }
     
-    func makeRandomWords() -> (String, String) {
-        
-        var childrens : [Children] = []
-        var children : Children
-        var randomNotification = ("", "")
-        
-        for value in items {
-            for value in value.children {
-                childrens.append(value)
-            }
-        }
-        
-        if let children = childrens.randomElement() {
-            if let word = children.word {
-                if let meaning = children.meaning {
-                    randomNotification = (word, meaning)
-                }
-            }
-        }
-        return randomNotification
-    }
+//    func makeRandomWords() -> (String, String) {
+//        
+//        var childrens : [Children] = []
+//        var children : Children
+//        var randomNotification = ("There is no word yet,", "Let's start study now!")
+//        
+//        for value in items {
+//            for value in value.children {
+//                childrens.append(value)
+//            }
+//        }
+//        
+//        if let children = childrens.randomElement() {
+//            if let word = children.word {
+//                if let meaning = children.meaning {
+//                    randomNotification = (word, meaning)
+//                }
+//            }
+//        }
+//        return randomNotification
+//    }
     
 }

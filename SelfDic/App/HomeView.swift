@@ -42,8 +42,8 @@ struct HomeView: View {
                 .listStyle(.plain)
             }
                 
-            .navigationViewStyle(StackNavigationViewStyle())
             .navigationTitle("SelfDic 📒")
+            .navigationBarTitleDisplayMode(.large)
             .navigationBarItems(trailing:
                                     HStack {
                 Button(action: {
@@ -51,22 +51,22 @@ struct HomeView: View {
                 }, label: {
                     Image(systemName: "folder.badge.plus")
             })
-                 Button(action: {
-                     isBelled.toggle()
-                     if isBelled == true {
-                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                             if success {
-                                 UserNotification()
-                             }
-                         }
-                     } else {
-                         UIApplication.shared.unregisterForRemoteNotifications()
-                         print("iscanceled")
-                     }
-                  }, label: {
-                      Image(systemName: isBelled ? "bell.fill" : "bell.slash.fill")
-            })
-                 .disabled(itemModel.items.count == 0)
+//                 Button(action: {
+//                     isBelled.toggle()
+//                     if isBelled == true {
+//                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+//                             if success {
+//                                 UserNotification()
+//                             }
+//                         }
+//                     } else {
+//                         UIApplication.shared.unregisterForRemoteNotifications()
+//                         print("iscanceled")
+//                     }
+//                  }, label: {
+//                      Image(systemName: isBelled ? "bell.fill" : "bell.slash.fill")
+//            })
+//                 .disabled(itemModel.items.count == 0)
             }
             )
             .navigationBarItems(leading: EditButton())
@@ -100,39 +100,39 @@ extension HomeView {
     }
 }
 
-extension HomeView {
-    func UserNotification() {
-        
-        var randomWord = itemModel.makeRandomWords()
-        
-        let content = UNMutableNotificationContent()
-        content.title = "1 Second recommended word"
-        content.subtitle = "\(randomWord.0) \(randomWord.1)"
-//        content.sound = UNNotificationSound.default
-
-        // show this notification five seconds from now
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
-//        var dateComponents = DateComponents()
-//        dateComponents.calendar = Calendar.current
+//extension HomeView {
+//    func UserNotification() {
 //
-//        dateComponents.weekday = 3  // Tuesday
-//        dateComponents.hour = 3  // 14:00 hours
+////        var randomWord = itemModel.makeRandomWords()
+////
+//        let content = UNMutableNotificationContent()
+//        content.title = "Hey, This is SelfDic!"
+//        content.subtitle = "Let's start the study now!"
+////        content.sound = UNNotificationSound.default
 //
-//        // Create the trigger as a repeating event.
-//        let trigger = UNCalendarNotificationTrigger(
-//                 dateMatching: dateComponents, repeats: true)
-
-        // choose a random identifier
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-        // add our notification request
-        UNUserNotificationCenter.current().add(request) { (error) in
-            if error != nil {
-                print("Error")
-            }
-        }
-    }
-}
+//        // show this notification five seconds from now
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: true)
+////        var dateComponents = DateComponents()
+////        dateComponents.calendar = Calendar.current
+////
+////        dateComponents.weekday = 3  // Tuesday
+////        dateComponents.hour = 3  // 14:00 hours
+////
+////        // Create the trigger as a repeating event.
+////        let trigger = UNCalendarNotificationTrigger(
+////                 dateMatching: dateComponents, repeats: true)
+//
+//        // choose a random identifier
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//
+//        // add our notification request
+//        UNUserNotificationCenter.current().add(request) { (error) in
+//            if error != nil {
+//                print("Error")
+//            }
+//        }
+//    }
+//}
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

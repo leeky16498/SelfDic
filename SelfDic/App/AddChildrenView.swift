@@ -13,39 +13,52 @@ struct AddChildrenView: View {
     @State var meaning : String = ""
     @State var isShowAlert : Bool = false
     @State var isClicked : Bool = false
+    @State var searchText : String = ""
+    
     
     @EnvironmentObject var itemModel : ItemModel
     
     var item : Item
+    
+    var searchItem : [Children] {
+        if searchText.isEmpty {
+            return item.children
+        } else {
+            return item.children.filter({$0.word!.contains(searchText)})
+        }
+    }
     
     var body: some View {
         ZStack {
             if item.children.count == 0 {
                 NochildrenView()
             } else {
-            List {
-                ForEach(item.children) { child in
-                    WordListRowView(children: child)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
-                            Button(role: .destructive, action: {
-                                itemModel.deleteChildren(children: child, item: item)
-                            }, label: {
-                                Image(systemName: "trash.fill")
-                            })
-                            
-                            Button(action: {
-                                itemModel.favoriteChildren(item: item, children: child)
-                            }, label: {
-                                Image(systemName: "star.fill")
-                                   
-                            })
-                            .tint(.green)
-                        })
+                    List {
+                        ForEach(searchItem) {child in
+                            WordListRowView(children: child)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+                                    Button(role: .destructive, action: {
+                                        itemModel.deleteChildren(children: child, item: item)
+                                    }, label: {
+                                        Image(systemName: "trash.fill")
+                                    })
+                                    
+                                    Button(action: {
+                                        itemModel.favoriteChildren(item: item, children: child)
+                                    }, label: {
+                                        Image(systemName: "star.fill")
+                                           
+                                    })
+                                    .tint(.green)
+                                })
+                            }
+                        }
+                    .listStyle(.plain)
+                    .padding(.top, -10)
+                    .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+                    .autocapitalization(.none)
+                    }
                 }
-                
-            }
-            }
-        }
         
         .navigationBarTitle("\(item.group!)'s Words")
         .navigationBarTitleDisplayMode(.inline)
@@ -101,5 +114,11 @@ extension AddChildrenView  {
         alert.addAction(addfolderAction)
         
         UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension UIApplication {
+    func dismissKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
