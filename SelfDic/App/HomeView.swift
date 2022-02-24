@@ -38,7 +38,6 @@ struct HomeView: View {
                     .onMove(perform: itemModel.moveItem)
                     .onDelete(perform: itemModel.deleteItem)
                 }
-                .id(UUID())
                 .listStyle(.plain)
             }
                 
@@ -73,8 +72,9 @@ extension HomeView {
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: {
             (_) in
         })
-        alert.addAction(addfolderAction)
+        
         alert.addAction(cancelAction)
+        alert.addAction(addfolderAction)
         
         UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
     }

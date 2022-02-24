@@ -11,7 +11,6 @@ import SwiftUI
 struct SelfDicApp: App {
     
     @StateObject var itemModel : ItemModel = ItemModel()
-    
     var body: some Scene {
         WindowGroup {
             ContentView()

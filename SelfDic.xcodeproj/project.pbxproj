@@ -110,7 +110,6 @@
 				7966A6EE27BAF54300C39203 /* View */,
 				790B47C927C60B4B007CEF1F /* App */,
 				790B47C827C60B3B007CEF1F /* ViewModel */,
-				790B47C727C60B2F007CEF1F /* Data */,
 				79FF697F27B9B1330093C39C /* Item.swift */,
 				79FF697527B9B0F70093C39C /* Assets.xcassets */,
 				79FF697727B9B0F70093C39C /* Preview Content */,
@@ -121,6 +120,7 @@
 		79FF697727B9B0F70093C39C /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				790B47C727C60B2F007CEF1F /* Data */,
 				79FF697827B9B0F70093C39C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -355,7 +355,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -385,7 +385,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

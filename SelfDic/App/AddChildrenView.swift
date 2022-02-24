@@ -26,17 +26,24 @@ struct AddChildrenView: View {
             List {
                 ForEach(item.children) { child in
                     WordListRowView(children: child)
-                        .onTapGesture {
-                            withAnimation(.linear(duration: 0.3)) {
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+                            Button(role: .destructive, action: {
+                                itemModel.deleteChildren(children: child, item: item)
+                            }, label: {
+                                Image(systemName: "trash.fill")
+                            })
+                            
+                            Button(action: {
                                 itemModel.favoriteChildren(item: item, children: child)
-                            }
-                        }
+                            }, label: {
+                                Image(systemName: "star.fill")
+                                   
+                            })
+                            .tint(.green)
+                        })
                 }
-                .onDelete { indexSet in
-                    itemModel.deleteChildren1(item: item, indexSet: indexSet)
-                }
+                
             }
-            .id(UUID())
             }
         }
         
@@ -66,11 +73,13 @@ struct AddChildrenView: View {
 }
 
 extension AddChildrenView  {
+    
     func addChildren() {
         let alert = UIAlertController(title: "Saving word", message: "Type word and meaning 😀", preferredStyle: .alert)
         
         alert.addTextField { word in
             word.placeholder = "Type a word"
+            word.keyboardType = .alphabet
         }
         
         alert.addTextField { meaning in
@@ -88,8 +97,8 @@ extension AddChildrenView  {
             (_) in
         })
         
-        alert.addAction(addfolderAction)
         alert.addAction(cancelAction)
+        alert.addAction(addfolderAction)
         
         UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
     }

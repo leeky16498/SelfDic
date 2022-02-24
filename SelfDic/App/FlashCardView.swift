@@ -25,7 +25,7 @@ struct FlashCardView: View {
             
             HStack {
                 if let group = item.group {
-                    Text("Game with '\(group)' 🗂")
+                    Text("Game with ' \(group) ' 🗂")
                         .font(.title3.bold())
                         .lineLimit(1)
                         .padding()
@@ -66,6 +66,7 @@ struct FlashCardView: View {
                         .font(.headline)
                         .foregroundColor(!isGeneral ? .white : .black)
                         .frame(width : 140, height : 50)
+                        .multilineTextAlignment(.center)
                         .background(!isGeneral ? .blue : .gray)
                         .cornerRadius(10)
                         .padding()
@@ -76,9 +77,10 @@ struct FlashCardView: View {
             }
             
             Text(randomWord.0)
-                    .font(.title2)
+                .font(.title2.bold())
                     .frame(maxWidth : .infinity)
                     .frame(height : UIScreen.main.bounds.height*0.33)
+                    .multilineTextAlignment(.center)
                     .background(.ultraThinMaterial)
                     .cornerRadius(20)
                     .shadow(color: .gray.opacity(0.4), radius: 3, x: 3, y: 3)
